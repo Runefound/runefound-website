@@ -12,7 +12,7 @@ import {
 
 // Local imports
 import { compileArrays } from '../helpers/compileArrays.js'
-import GOOGLE_FONTS from '../../googlefontsconfig.js'
+import GOOGLE_FONTS from '../../googlefonts.config.js'
 
 
 
