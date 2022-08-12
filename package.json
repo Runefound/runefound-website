@@ -1,0 +1,48 @@
+{
+  "name": "rollforguild.com",
+  "version": "0.0.0-development",
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Trezy",
+    "email": "t@trezy.com"
+  },
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-brands-svg-icons": "^6.1.2",
+    "@fortawesome/free-regular-svg-icons": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "classnames": "^2.3.1",
+    "framer-motion": "^7.1.0",
+    "next": "^12.2.4",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-color-mode": "^2.0.1",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^12.2.4",
+    "eslint": "^8.21.0",
+    "eslint-plugin-editorconfig": "^4.0.2",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-optimize-regex": "^1.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-perf": "^3.3.1",
+    "eslint-plugin-react-prefer-function-component": "^3.0.0",
+    "eslint-plugin-security": "^1.5.0",
+    "eslint-plugin-sort-class-members": "^1.14.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "sass": "^1.54.3"
+  },
+  "packageManager": "yarn@3.2.2"
+}

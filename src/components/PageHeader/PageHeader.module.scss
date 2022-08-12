@@ -1,0 +1,16 @@
+.page-header {
+	background-color: var(--palette-black);
+	font-family: var(--font-display);
+	font-size: 4rem;
+	grid-area: header;
+	line-height: 1.5;
+	padding-bottom: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	padding-top: 1rem;
+	text-transform: uppercase;
+
+	h2 {
+		font-weight: 500;
+	}
+}

@@ -1,0 +1,28 @@
+.banner {
+	background-color: var(--palette-black);
+	border-right-color: var(--palette-light-grey);
+	border-right-style: solid;
+	border-right-width: 0.1rem;
+	display: flex;
+	flex-direction: column;
+	font-family: var(--font-display);
+	font-stretch: 100%;
+	font-weight: 400;
+	line-height: 2;
+}
+
+.brand a {
+	align-items: center;
+	display: flex;
+	flex-shrink: 0;
+	height: 7.5rem;
+	justify-content: center;
+	position: relative;
+	width: 20rem;
+
+	> * {
+		max-width: 50%;
+		left: 50% !important;
+		translate: -50% 0;
+	}
+}

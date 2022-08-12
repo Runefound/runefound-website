@@ -1,0 +1,25 @@
+.page-layout {
+	border-top-color: var(--palette-light-grey);
+	border-top-style: solid;
+	border-top-width: 0.1rem;
+	display: grid;
+	grid-template-areas:
+		'banner header'
+		'banner content';
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
+	height: 100vh;
+	width: 100%;
+
+	[role=banner] {
+		grid-area: banner;
+	}
+
+	main {
+		grid-area: content;
+	}
+}
+
+.page-header {
+	grid-area: header;
+}

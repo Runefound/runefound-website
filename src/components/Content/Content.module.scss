@@ -1,0 +1,45 @@
+.content {
+	--gutter: 2rem;
+	--big-gutter: calc(var(--gutter) * 2);
+
+	line-height: 1.4;
+
+	p,
+	ol,
+	ul {
+		margin-bottom: var(--gutter);
+		margin-left: var(--gutter);
+		margin-right: var(--gutter);
+		max-width: 60ch;
+	}
+
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		margin-bottom: 1rem;
+		margin-left: var(--gutter);
+		margin-right: var(--gutter);
+		margin-top: calc(var(--gutter) * 2);
+	}
+
+	h3 {
+		font-size: 1.4em;
+		position: relative;
+
+		+ h4 {
+			margin-top: var(--gutter);
+		}
+	}
+
+	ol, ul {
+		padding-left: 3rem;
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	ul {
+		list-style-type: square;
+	}
+}

@@ -1,0 +1,22 @@
+.banner-footer {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-top: auto;
+	padding: 2rem;
+}
+
+.legal {
+	display: flex;
+	flex-direction: column;
+	font-size: 0.7em;
+
+	[data-icon] {
+		margin-right: 0.5rem;
+	}
+}
+
+.social {
+	justify-content: space-between;
+	display: flex;
+}

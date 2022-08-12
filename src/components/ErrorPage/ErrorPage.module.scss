@@ -1,0 +1,30 @@
+.error-page {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.error-code {
+	font-family: var(--font-display);
+	font-size: 2em;
+	padding: 2rem;
+	position: relative;
+}
+
+.error-message {
+	border-left-color: currentColor;
+	border-left-style: solid;
+	border-left-width: 0.1rem;
+	padding: 2rem;
+
+	h3 {
+		font-family: var(--font-display);
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+	}
+
+	p {
+		line-height: 1.4;
+		max-width: 60ch;
+	}
+}
