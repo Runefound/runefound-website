@@ -22,7 +22,7 @@ import { useMemo } from 'react'
  * @param {string} [props.className] Additional classes to be applied to the component.
  * @param {boolean} [props.isDisabled=false] Whether or not this component should be disabled.
  * @param {boolean} [props.isSubmit=false] Whether or not this should be a submit button.
- * @param {function} [props.onClick] The function to be executed when this button is clicked.
+ * @param {Function} [props.onClick] The function to be executed when this button is clicked.
  */
 export function Button(props) {
 	const {

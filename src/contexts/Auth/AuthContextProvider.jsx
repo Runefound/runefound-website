@@ -70,7 +70,9 @@ export function AuthContextProvider(props) {
 
 		try {
 			response = await API.validateEmail(email)
-		} catch (error) {}
+		} catch (error) {
+			console.log(error)
+		}
 
 		if (response.status === 204) {
 			return true
@@ -84,7 +86,9 @@ export function AuthContextProvider(props) {
 
 		try {
 			response = await API.validateUsername(username)
-		} catch (error) {}
+		} catch (error) {
+			console.log(error)
+		}
 
 		if (response.status === 204) {
 			return true

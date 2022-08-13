@@ -16,6 +16,7 @@ import { useMemo } from 'react'
 
 /**
  * Wraps page content in a `main` element and abstracts SEO functionality.
+ *
  * @param {object} props All props.
  * @param {import('react').ReactNode} [props.children] The contents of the component.
  * @param {string} [props.className] Additional classes to be applied to the component.

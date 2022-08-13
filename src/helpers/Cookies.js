@@ -30,6 +30,7 @@ function updateCachedCookies() {
 		.replace(/\s*;\s*/gu, ';')
 		.replace(/\s*=\s*/gu, '=')
 
+	// eslint-disable-next-line security/detect-non-literal-regexp
 	const cookies = [...document.cookie.matchAll(new RegExp(REGEX_STRING, 'gu'))]
 
 	cookieJar = cookies.reduce((accumulator, cookieArray) => {
