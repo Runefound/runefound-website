@@ -20,6 +20,7 @@ import { useRouter } from 'next/router'
 
 
 // Local imports
+import { AuthContextProvider } from '../contexts/Auth/AuthContextProvider.jsx'
 import { PageLayout } from '../components/PageLayout/PageLayout.jsx'
 
 
@@ -47,17 +48,19 @@ export default function App(props) {
 
 	return (
 		<ColorModeContextProvider>
-			<AnimatePresence
-				exitBeforeEnter
-				onExitComplete={handleExitComplete}>
-				<PageLayout
-					showTitle={Component.showTitle}
-					title={Component.title}>
-					<Component
-						key={router.route}
-						{...pageProps} />
-				</PageLayout>
-			</AnimatePresence>
+			<AuthContextProvider>
+				<AnimatePresence
+					exitBeforeEnter
+					onExitComplete={handleExitComplete}>
+					<PageLayout
+						showTitle={Component.showTitle}
+						title={Component.title}>
+						<Component
+							key={router.route}
+							{...pageProps} />
+					</PageLayout>
+				</AnimatePresence>
+			</AuthContextProvider>
 		</ColorModeContextProvider>
 	)
 }
