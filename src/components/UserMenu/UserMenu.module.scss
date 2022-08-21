@@ -1,0 +1,15 @@
+.user-menu {
+	align-items: stretch;
+	display: flex;
+	height: 100%;
+	margin-left: auto;
+	position: relative;
+	white-space: nowrap;
+
+	menu {
+		background-color: var(--palette-black);
+		position: absolute;
+		right: 0;
+		top: 100%;
+	}
+}
