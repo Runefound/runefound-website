@@ -12,7 +12,7 @@ import {
 	useMemo,
 } from 'react'
 import classnames from 'classnames'
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+// import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 import TextareaAutosize from 'react-textarea-autosize'
 
