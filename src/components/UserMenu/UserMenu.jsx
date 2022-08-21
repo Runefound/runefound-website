@@ -10,6 +10,8 @@ import {
 	useCallback,
 	useState,
 } from 'react'
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
@@ -17,6 +19,7 @@ import {
 
 // Local imports
 import { Button } from '../Button/Button.jsx'
+import { Link } from '../Link/Link.jsx'
 import { useAuth } from '../../contexts/Auth/useAuth.js'
 
 
@@ -32,6 +35,7 @@ export function UserMenu() {
 		isLoggingIn,
 		isLoggingOut,
 		logout,
+		user,
 	} = useAuth()
 
 	const [userMenuIsOpen, setUserMenuIsOpen] = useState(false)
@@ -40,18 +44,27 @@ export function UserMenu() {
 		setUserMenuIsOpen(previousState => !previousState)
 	}, [setUserMenuIsOpen])
 
-	if (!isLoggedIn && !isLoggingIn && !isLoggingOut) {
-		return null
-	}
-
 	return (
 		<div className={styles['user-menu']}>
 			{isLoggingIn && 'Logging in...'}
 			{isLoggingOut && 'Logging out...'}
 
+			{!isLoggedIn && (
+				<Link
+					href={'/login'}
+					isAuxiliary
+					isButton>
+					<FontAwesomeIcon
+						fixedWidth
+						icon={faRightToBracket} />
+
+					{'Login'}
+				</Link>
+			)}
+
 			{isLoggedIn && (
 				<Button onClick={toggleUserMenuClick}>
-					{'Logged in'}
+					{`Logged in as ${user.displayName}`}
 				</Button>
 			)}
 

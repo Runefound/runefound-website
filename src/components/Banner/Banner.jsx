@@ -9,7 +9,6 @@ import styles from './Banner.module.scss'
 import {
 	faComments,
 	faMagnifyingGlass,
-	faRightToBracket,
 	faUsers,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -53,17 +52,6 @@ const LINKS = [
 				path: '/groups/search',
 			},
 		],
-	},
-	{
-		children: (
-			<>
-				<FontAwesomeIcon
-					fixedWidth
-					icon={faRightToBracket} />
-				{'Login'}
-			</>
-		),
-		path: '/login',
 	},
 	{
 		children: (

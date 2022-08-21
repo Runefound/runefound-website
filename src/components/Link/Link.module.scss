@@ -1,7 +1,9 @@
 .link {
+	align-items: center;
 	color: var(--palette-light-green);
+	display: inline-flex;
 	text-decoration-color: transparent;
-	transition-duration: 0.1s;
+	transition-duration: 0.2s;
 	transition-property: text-decoration-color;
 
 	&:focus,
