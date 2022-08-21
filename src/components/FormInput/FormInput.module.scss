@@ -1,0 +1,36 @@
+.form-input {
+	border-radius: 0.25rem;
+	display: flex;
+	overflow: hidden;
+
+	input {
+		background-color: var(--palette-white);
+		border: none;
+		color: var(--palette-black);
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		line-height: 2;
+		margin: 0;
+		order: 2;
+		padding: 0.5rem 1rem;
+		width: 100%;
+
+		&::placeholder {
+			color: var(--palette-light-grey);
+		}
+	}
+}
+
+.addon-start {
+	align-items: center;
+	background-color: var(--palette-white);
+	border-right-color: var(--palette-light-grey);
+	border-right-style: solid;
+	border-right-width: 0.1rem;
+	color: var(--palette-light-grey);
+	display: flex;
+	justify-content: center;
+	order: 1;
+	padding: 1rem;
+}

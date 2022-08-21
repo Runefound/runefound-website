@@ -1,16 +1,22 @@
 .page-header {
+	align-items: center;
 	background-color: var(--palette-black);
+	display: flex;
 	font-family: var(--font-display);
-	font-size: 4rem;
 	grid-area: header;
-	line-height: 1.5;
 	padding-bottom: 1rem;
 	padding-left: 2rem;
 	padding-right: 2rem;
 	padding-top: 1rem;
-	text-transform: uppercase;
 
 	h2 {
+		font-size: 4rem;
 		font-weight: 500;
+		line-height: 1.5;
+		text-transform: uppercase;
 	}
+}
+
+.user-menu {
+	margin-left: auto;
 }

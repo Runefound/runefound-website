@@ -1,12 +1,18 @@
 // Module imports
+import {
+	useCallback,
+	useEffect,
+	useMemo,
+} from 'react'
 import classnames from 'classnames'
-import { useCallback } from 'react'
+import { useRouter } from 'next/router.js'
 
 
 
 
 
 // Local imports
+import { Content } from '../Content/Content.jsx'
 import { Form } from '../Form/Form.jsx'
 import { FormButton } from '../FormButton/FormButton.jsx'
 import { FormField } from '../FormField/FormField.jsx'
@@ -17,15 +23,9 @@ import { PageContent } from '../PageContent/PageContent.jsx'
 import { useAuth } from '../../contexts/Auth/useAuth.js'
 
 
-
-
-
-// Constants
-const INITIAL_VALUES = {
-	username: '',
-	email: '',
-	password: '',
-}
+import { Toolbar } from '../Toolbar/Toolbar.jsx'
+import { ToolbarAuxiliary } from '../Toolbar/ToolbarAuxiliary.jsx'
+import { ToolbarPrimary } from '../Toolbar/ToolbarPrimary.jsx'
 
 
 
@@ -42,10 +42,13 @@ export function CreateAccountPage() {
 		isRegistering,
 		register,
 	} = useAuth()
+	const Router = useRouter()
 
-	const handleSubmit = useCallback(async(formData, actions) => {
-		const { values } = formData
-		const { updateValidity } = actions
+	const handleSubmit = useCallback(async formProps => {
+		const {
+			values,
+			updateValidity,
+		} = formProps
 
 		try {
 			await register(values)
@@ -60,75 +63,84 @@ export function CreateAccountPage() {
 		}
 	}, [register])
 
+	const buttonCompiledClassName = useMemo(() => {
+		return classnames({
+			'is-loading': isRegistering || isRegistered,
+		})
+	}, [
+		isRegistered,
+		isRegistering,
+	])
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			Router.push('/')
+		}
+	}, [
+		isLoggedIn,
+		isRegistered,
+		Router,
+	])
+
 	return (
 		<PageContent>
-			<Form
-				className={'box column is-half is-offset-one-quarter section'}
-				initialValues={INITIAL_VALUES}
-				onSubmit={handleSubmit}>
-				<h2 className={'title'}>
-					{'Create an Account'}
-				</h2>
+			<Content>
+				<Form onSubmit={handleSubmit}>
+					<FormField
+						isRequired
+						label={'Username'}>
+						<FormInput
+							isDisabled={isRegistering || isRegistered}
+							name={'username'} />
+					</FormField>
 
-				<FormField
-					id={'username'}
-					isRequired
-					label={'Username'}>
-					<FormInput
-						id={'username'}
-						isDisabled={isRegistering || isRegistered} />
-				</FormField>
+					<FormField
+						isRequired
+						label={'Email'}>
+						<FormInput
+							isDisabled={isRegistering || isRegistered}
+							name={'email'}
+							type={'email'} />
+					</FormField>
 
-				<FormField
-					id={'email'}
-					isRequired
-					label={'Email'}>
-					<FormInput
-						id={'email'}
-						isDisabled={isRegistering || isRegistered}
-						type={'email'} />
-				</FormField>
+					<FormField
+						isRequired
+						label={'Password'}>
+						<FormInput
+							isDisabled={isRegistering || isRegistered}
+							minLength={6}
+							name={'password'}
+							type={'password'} />
+					</FormField>
 
-				<FormField
-					id={'password'}
-					isRequired
-					label={'Password'}>
-					<FormInput
-						id={'password'}
-						isDisabled={isRegistering || isRegistered}
-						minLength={6}
-						type={'password'} />
-				</FormField>
-
-				<div className={'columns'}>
-					<div className={'column has-text-left'}>
-						{isRegistering && 'Creating account...'}
-						{isLoggingIn && 'Logging in...'}
-						{isLoggedIn && 'Redirecting...'}
-					</div>
-
-					<div className={'column has-text-right'}>
-						<div className={'field is-grouped'}>
+					<Toolbar>
+						<ToolbarPrimary>
 							<Link
 								className={'button is-ghost mr-2'}
 								disabled={isRegistering || isRegistered}
-								href={'/login'}>
+								href={'/login'}
+								isButton
+								isLink>
 								{'Already have an account?'}
 							</Link>
 
 							<FormButton
-								className={classnames({
-									'is-primary': true,
-									'is-loading': isRegistering || isRegistered,
-								})}
+								className={buttonCompiledClassName}
 								isDisabled={isRegistering || isRegistered}
+								isPrimary
 								isSubmit>
 								{'Create Account'}
 							</FormButton>
-						</div>
-					</div>
-				</div>
-			</Form>
+						</ToolbarPrimary>
+
+						<ToolbarAuxiliary>
+							{isRegistering && 'Creating account...'}
+							{isLoggingIn && 'Logging in...'}
+							{isLoggedIn && 'Redirecting...'}
+						</ToolbarAuxiliary>
+					</Toolbar>
+				</Form>
+			</Content>
 		</PageContent>
 	)
 }

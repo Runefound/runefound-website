@@ -5,7 +5,48 @@
 	border: none;
 	color: inherit;
 	cursor: pointer;
+	display: block;
 	font-family: inherit;
 	font-size: inherit;
-	padding: 0;
+	line-height: 2;
+	padding: 1rem 2rem;
+	text-decoration: none;
+	transition-duration: 0.2s;
+	transition-property:
+		background-color,
+		color;
+
+	&.is-auxiliary {
+		background-color: var(--palette-grey);
+		color: var(--palette-white);
+
+		&:hover {
+			background-color: var(--palette-dark-grey);
+		}
+	}
+
+	&.is-link {
+		color: var(--palette-green);
+		text-decoration: underline;
+		text-decoration-color: transparent;
+
+		&:hover {
+			text-decoration-color: currentColor;
+		}
+	}
+
+	&.is-primary {
+		background-color: var(--palette-green);
+		color: var(--palette-white);
+
+		&:hover {
+			background-color: var(--palette-dark-green);
+		}
+	}
+
+	&:disabled,
+	&.is-disabled {
+		cursor: auto;
+		opacity: 0.65;
+	}
 }

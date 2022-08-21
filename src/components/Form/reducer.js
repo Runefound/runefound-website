@@ -24,14 +24,46 @@ export function reducer(state, action) {
 	}
 
 	switch (type) {
+		case 'initial value changed':
+			if (typeof newState.values[payload.fieldID] === 'undefined') {
+				newState.values = {
+					...newState.values,
+					[payload.fieldID]: payload.value,
+				}
+			}
+
+			newState.initialValues = {
+				...newState.initialValues,
+				[payload.fieldID]: payload.value,
+			}
+			newState.touched = {
+				...newState.touched,
+				[payload.fieldID]: newState.initialValues[payload.fieldID] !== payload.value,
+			}
+			newState.isTouched = Object
+				.values(newState.touched)
+				.some(isTouched => isTouched)
+			break
+
+		case 'name changed':
+			if (Object.values(newState.names).includes(payload.value)) {
+				console.error(`Form control names must be unique; found multiple fields named ${payload.value}`)
+			} else {
+				newState.names = {
+					...newState.names,
+					[payload.fieldID]: payload.value,
+				}
+			}
+			break
+
 		case 'validity changed':
 			newState.validity = {
 				...newState.validity,
-				[payload.fieldName]: !payload.errors?.length,
+				[payload.fieldID]: !payload.errors?.length,
 			}
 			newState.errors = {
 				...newState.errors,
-				[payload.fieldName]: payload.errors,
+				[payload.fieldID]: payload.errors,
 			}
 			newState.isValid = !Object
 				.values(newState.validity)
@@ -41,11 +73,11 @@ export function reducer(state, action) {
 		case 'value changed':
 			newState.values = {
 				...newState.values,
-				[payload.fieldName]: payload.value,
+				[payload.fieldID]: payload.value,
 			}
 			newState.touched = {
 				...newState.touched,
-				[payload.fieldName]: newState.initialValues[payload.fieldName] !== payload.value,
+				[payload.fieldID]: newState.initialValues[payload.fieldID] !== payload.value,
 			}
 			newState.isTouched = Object
 				.values(newState.touched)

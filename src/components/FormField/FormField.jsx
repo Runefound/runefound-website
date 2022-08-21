@@ -1,5 +1,16 @@
+// Style imports
+import styles from './FormField.module.scss'
+
+
+
+
+
 // Module imports
-import { Children } from 'react'
+import {
+	Children,
+	useId,
+	useMemo,
+} from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
@@ -8,6 +19,7 @@ import PropTypes from 'prop-types'
 
 
 // Local imports
+import { FormFieldContext } from './FormFieldContext.js'
 import { useForm } from '../Form/useForm.js'
 
 
@@ -21,7 +33,6 @@ import { useForm } from '../Form/useForm.js'
  * @param {import('react').ReactNode} [props.children] The contents of the component.
  * @param {string} [props.className] Additional classes to be applied to the component.
  * @param {string} [props.helperText] A message to clarify the purpose or usage of the field.
- * @param {string} props.id The ID of this field in the form state.
  * @param {boolean} [props.isRequired] Whether or not this field must be non-empty for the form to be valid.
  * @param {string} [props.label] A label to indicate the usage of this field.
  */
@@ -30,14 +41,22 @@ export function FormField(props) {
 		children,
 		className,
 		helperText,
-		id,
 		isRequired,
 		label,
 	} = props
 	const { errors: formErrors } = useForm()
+	const id = useId()
 
 	let renderedHelpers = null
 	let renderedLabel = null
+
+	const compiledClassName = useMemo(() => {
+		return classnames(styles['form-field'], className)
+	}, [className])
+
+	const providerValue = useMemo(() => {
+		return { id }
+	}, [id])
 
 	if (!formErrors[id]?.length && helperText) {
 		renderedHelpers = (
@@ -89,11 +108,13 @@ export function FormField(props) {
 	}
 
 	return (
-		<div className={classnames('field', className)}>
-			{renderedLabel}
-			{children}
-			{renderedHelpers}
-		</div>
+		<FormFieldContext.Provider value={providerValue}>
+			<div className={compiledClassName}>
+				{renderedLabel}
+				{children}
+				{renderedHelpers}
+			</div>
+		</FormFieldContext.Provider>
 	)
 }
 
@@ -112,7 +133,6 @@ FormField.propTypes = {
 		PropTypes.node,
 		PropTypes.string,
 	]),
-	id: PropTypes.string.isRequired,
 	isRequired: PropTypes.bool,
 	label: PropTypes.string,
 }

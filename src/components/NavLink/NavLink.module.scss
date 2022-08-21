@@ -61,7 +61,7 @@ a.nav-link {
 
 	&:after,
 	&:before {
-		background-color: var(--palette-green);
+		background-color: var(--palette-light-green);
 		content: '';
 		display: block;
 		height: 0.1rem;
@@ -86,7 +86,7 @@ a.nav-link {
 
 	&:focus,
 	&:hover {
-		background-color: hsla(var(--palette-green-hsl), 0.1);
+		background-color: hsla(var(--palette-light-green-hsl), 0.1);
 
 		&:after {
 			left: 0;

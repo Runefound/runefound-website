@@ -1,3 +1,10 @@
+// Style imports
+import styles from './Form.module.scss'
+
+
+
+
+
 // Module imports
 import {
 	forwardRef,
@@ -5,6 +12,7 @@ import {
 	useMemo,
 	useReducer,
 } from 'react'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 
@@ -30,20 +38,40 @@ export const Form = forwardRef(function FormWithForwardedRef(props, ref) {
 	} = props
 	const [state, dispatch] = useReducer(reducer, createInitialState({ initialValues }))
 
-	const updateValidity = useCallback((fieldName, errors) => {
+	const setInitialValue = useCallback((fieldID, value) => {
+		dispatch({
+			payload: {
+				fieldID,
+				value,
+			},
+			type: 'initial value changed',
+		})
+	}, [])
+
+	const setName = useCallback((fieldID, name) => {
+		dispatch({
+			payload: {
+				fieldID,
+				value: name,
+			},
+			type: 'name changed',
+		})
+	}, [])
+
+	const updateValidity = useCallback((fieldID, errors) => {
 		dispatch({
 			payload: {
 				errors,
-				fieldName,
+				fieldID,
 			},
 			type: 'validity changed',
 		})
 	}, [dispatch])
 
-	const updateValue = useCallback((fieldName, value) => {
+	const updateValue = useCallback((fieldID, value) => {
 		dispatch({
 			payload: {
-				fieldName,
+				fieldID,
 				value,
 			},
 			type: 'value changed',
@@ -61,22 +89,39 @@ export const Form = forwardRef(function FormWithForwardedRef(props, ref) {
 
 	const handleSubmit = useCallback(event => {
 		event.preventDefault()
-		onSubmit(state, { updateValidity })
+		onSubmit({
+			values: Object
+				.entries(state.values)
+				.reduce((accumulator, [key, value]) => {
+					accumulator[state.names[key] ?? key] = value
+					return accumulator
+				}, {}),
+			state,
+			updateValidity,
+		})
 	}, [
 		onSubmit,
 		state,
 		updateValidity,
 	])
 
+	const compiledClassName = useMemo(() => {
+		return classnames(styles.form, className)
+	}, [className])
+
 	const providerValue = useMemo(() => {
 		return {
 			...state,
 			reset,
+			setInitialValue,
+			setName,
 			updateValidity,
 			updateValue,
 		}
 	}, [
 		reset,
+		setInitialValue,
+		setName,
 		state,
 		updateValidity,
 		updateValue,
@@ -86,7 +131,7 @@ export const Form = forwardRef(function FormWithForwardedRef(props, ref) {
 		<FormContext.Provider value={providerValue}>
 			<form
 				ref={ref}
-				className={className}
+				className={compiledClassName}
 				onSubmit={handleSubmit}>
 				<fieldset disabled={isDisabled}>
 					{children}

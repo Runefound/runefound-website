@@ -1,11 +1,18 @@
+// Style imports
+import styles from './FormInput.module.scss'
+
+
+
+
+
 // Module imports
 import {
 	useCallback,
-	useEffect,
+	useLayoutEffect,
+	useMemo,
 } from 'react'
 import classnames from 'classnames'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import TextareaAutosize from 'react-textarea-autosize'
 
@@ -15,6 +22,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 
 // Local imports
 import { useForm } from '../Form/useForm.js'
+import { useFormFieldContext } from '../FormField/useFormFieldContext.js'
 
 
 
@@ -25,33 +33,39 @@ import { useForm } from '../Form/useForm.js'
  *
  * @param {object} props All props.
  * @param {'center' | 'left' | 'right'} [props.alignment='left'] Alters the has-text-* value.
+ * @param {import('react').ReactNode} [props.addonEnd] Component(s) to be displayed after the input.
+ * @param {import('react').ReactNode} [props.addonStart] Component(s) to be displayed before the input.
  * @param {string} [props.autocomplete] Informs the user agent what type of autocomplete this input supports, if any.
  * @param {string} [props.className] Additional classes to be applied to the component.
- * @param {import('react').ReactNode} [props.iconLeft] An icon to be displayed to the left of the input.
  * @param {string} props.id The ID of this input in the form state.
+ * @param {string} [props.initialValue] The initial value of this input.
  * @param {boolean} [props.isDisabled] Whether or not this input is disabled.
  * @param {boolean} [props.isRequired] Whether or not this input must be non-empty for the form to be valid.
  * @param {boolean} [props.isMultiline] Whether or not this input supports multiple lines of text.
  * @param {number} [props.maxLength] The maximum number of characters supported by this input.
  * @param {number} [props.minLength] The minimum number of characters supported by this input.
+ * @param {string} [props.name] The name to be used for this input.
  * @param {Function} [props.onChange] A function to be executed when the contents of this input change.
  * @param {string} [props.placeholder] Placeholder text to be displayed inside the input.
  * @param {string} [props.type='text'] The type of this input.
  * @param {object} [props.validateWithErrors=false] ?
- * @param {object} [props.value] The current value of the input.
+ * @param {string} [props.value] The current value of the input.
  */
 export function FormInput(props) {
 	const {
+		addonStart,
+		addonEnd,
 		alignment,
 		autocomplete,
 		className,
-		iconLeft,
 		id,
+		initialValue,
 		isDisabled,
 		isMultiline,
 		isRequired,
 		maxLength,
 		minLength,
+		name,
 		onChange,
 		placeholder,
 		type,
@@ -60,10 +74,15 @@ export function FormInput(props) {
 	} = props
 	const {
 		errors: formErrors,
+		setInitialValue,
+		setName,
 		updateValidity,
 		updateValue,
 		values,
 	} = useForm()
+	const {
+		id: internalID,
+	} = useFormFieldContext()
 
 	const validate = useCallback(async(state, initialProps) => {
 		const errors = []
@@ -91,9 +110,9 @@ export function FormInput(props) {
 			}
 		}
 
-		updateValidity(id, errors)
+		updateValidity(internalID, errors)
 	}, [
-		id,
+		internalID,
 		type,
 		updateValidity,
 		validateWithErrors,
@@ -113,27 +132,102 @@ export function FormInput(props) {
 			}
 		}
 
-		updateValue(id, localValue)
+		updateValue(internalID, localValue)
 		validate(localValue, props)
 	}, [
-		id,
+		internalID,
 		props,
 		type,
 		updateValue,
 		validate,
 	])
 
-	useEffect(() => {
-		// Mark empty, non-required fields as valid
-		if (!isRequired && !values[id]) {
-			updateValidity(id, [])
+	const hasErrors = useMemo(() => {
+		return formErrors[internalID]?.length
+	}, [
+		formErrors,
+		internalID,
+	])
 
-		// Run a validity check against a field's initial state if it's non-empty
-		} else if (isRequired && (values[id] !== '')) {
-			validate(values[id], props)
+	const wrapperCompiledClassName = useMemo(() => {
+		return classnames(styles['form-input'], className, {
+			'has-icons-left': addonStart,
+			'has-icons-right': hasErrors,
+		})
+	}, [
+		addonStart,
+		className,
+		hasErrors,
+	])
+
+	const sharedProps = useMemo(() => {
+		return {
+			autoComplete: autocomplete,
+			className: classnames({
+				'has-text-centered': alignment === 'center',
+				'has-text-left': alignment === 'left',
+				'has-text-right': alignment === 'right',
+				input: !isMultiline,
+				'is-danger': hasErrors,
+				textarea: isMultiline,
+			}),
+			disabled: isDisabled,
+			id: id,
+			maxLength: maxLength,
+			minLength: minLength,
+			name: name,
+			onChange: onChange ?? handleChange,
+			placeholder: placeholder,
+			required: isRequired,
+			value: values[internalID] ?? value,
+		}
+	}, [
+		alignment,
+		autocomplete,
+		handleChange,
+		hasErrors,
+		isMultiline,
+		id,
+		internalID,
+		isDisabled,
+		isRequired,
+		maxLength,
+		minLength,
+		name,
+		onChange,
+		placeholder,
+		values,
+		value,
+	])
+
+	useLayoutEffect(() => {
+		if (initialValue) {
+			setInitialValue(internalID, initialValue)
+		}
+
+		if (name || id) {
+			setName(internalID, name || id)
 		}
 	}, [
 		id,
+		initialValue,
+		internalID,
+		name,
+		setInitialValue,
+		setName,
+	])
+
+	useLayoutEffect(() => {
+		// Mark empty, non-required fields as valid
+		if (!isRequired && !values[internalID]) {
+			updateValidity(internalID, [])
+
+		// Run a validity check against a field's initial state if it's non-empty
+		} else if (isRequired && (values[internalID] !== '')) {
+			validate(values[internalID], props)
+		}
+	}, [
+		internalID,
 		isRequired,
 		props,
 		updateValidity,
@@ -142,91 +236,69 @@ export function FormInput(props) {
 	])
 
 	return (
-		<div
-			className={classnames(className, {
-				control: true,
-				'has-icons-left': iconLeft,
-				'has-icons-right': formErrors[id]?.length,
-			})}>
-
+		<div className={wrapperCompiledClassName}>
 			{isMultiline && (
-				<TextareaAutosize
-					autoComplete={autocomplete}
-					className={classnames({
-						'has-text-centered': alignment === 'center',
-						'has-text-left': alignment === 'left',
-						'has-text-right': alignment === 'right',
-						textarea: true,
-						'is-danger': formErrors[id]?.length,
-					})}
-					disabled={isDisabled}
-					id={id}
-					maxLength={maxLength}
-					minLength={minLength}
-					onChange={onChange ?? handleChange}
-					placeholder={placeholder}
-					required={isRequired}
-					value={value ?? values[id]} />
+				<TextareaAutosize {...sharedProps} />
 			)}
 
 			{!isMultiline && (
 				<input
-					autoComplete={autocomplete}
-					className={classnames({
-						'has-text-centered': alignment === 'center',
-						'has-text-left': alignment === 'left',
-						'has-text-right': alignment === 'right',
-						input: true,
-						'is-danger': formErrors[id]?.length,
-					})}
-					disabled={isDisabled}
-					id={id}
-					maxLength={maxLength}
-					minLength={minLength}
-					onChange={onChange ?? handleChange}
-					placeholder={placeholder}
-					required={isRequired}
-					type={type}
-					value={value ?? values[id]} />
+					{...sharedProps}
+					type={type} />
 			)}
 
-			{Boolean(iconLeft) && (
-				<span className={'icon is-small is-left'}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={iconLeft} />
+			{Boolean(addonStart) && (
+				<span className={styles['addon-start']}>
+					{addonStart}
 				</span>
 			)}
 
-			{Boolean(formErrors[id]?.length) && (
+			{Boolean(addonEnd) && (
+				// <span className={'icon is-small is-left'}>
+				// 	<FontAwesomeIcon
+				// 		fixedWidth
+				// 		icon={addonEnd} />
+				// </span>
+				<span className={styles['addon-right']}>
+					{addonEnd}
+				</span>
+			)}
+
+			{/* {Boolean(hasErrors) && (
 				<span className={'icon is-small is-right'}>
 					<FontAwesomeIcon
 						fixedWidth
 						icon={faExclamationTriangle} />
 				</span>
-			)}
+			)} */}
 		</div>
 	)
 }
 
 FormInput.defaultProps = {
+	addonEnd: null,
+	addonStart: null,
 	alignment: 'left',
 	autocomplete: null,
 	className: null,
-	iconLeft: null,
+	id: null,
+	initialValue: '',
 	isDisabled: false,
 	isMultiline: false,
 	isRequired: false,
 	maxLength: null,
 	minLength: null,
+	name: '',
 	onChange: null,
 	placeholder: '',
 	type: 'text',
 	validateWithErrors: false,
-	value: null,
+	value: '',
 }
 
 FormInput.propTypes = {
+	addonEnd: PropTypes.node,
+	addonStart: PropTypes.node,
 	alignment: PropTypes.oneOf([
 		'center',
 		'left',
@@ -282,16 +354,14 @@ FormInput.propTypes = {
 		'username',
 	]),
 	className: PropTypes.string,
-	iconLeft: PropTypes.oneOfType([
-		PropTypes.array,
-		PropTypes.string,
-	]),
-	id: PropTypes.string.isRequired,
+	id: PropTypes.string,
+	initialValue: PropTypes.string,
 	isDisabled: PropTypes.bool,
 	isMultiline: PropTypes.bool,
 	isRequired: PropTypes.bool,
 	maxLength: PropTypes.number,
 	minLength: PropTypes.number,
+	name: PropTypes.string,
 	onChange: PropTypes.func,
 	placeholder: PropTypes.string,
 	type: PropTypes.oneOf([
@@ -320,8 +390,5 @@ FormInput.propTypes = {
 		// 'submit',
 	]),
 	validateWithErrors: PropTypes.bool,
-	value: PropTypes.oneOfType([
-		PropTypes.number,
-		PropTypes.string,
-	]),
+	value: PropTypes.string,
 }

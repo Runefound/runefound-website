@@ -17,6 +17,10 @@ export const FormContext = createContext({
 	// eslint-disable-next-line jsdoc/require-jsdoc
 	reset: () => {},
 	// eslint-disable-next-line jsdoc/require-jsdoc
+	setInitialValue: () => {},
+	// eslint-disable-next-line jsdoc/require-jsdoc
+	setName: () => {},
+	// eslint-disable-next-line jsdoc/require-jsdoc
 	updateValidity: () => {},
 	// eslint-disable-next-line jsdoc/require-jsdoc
 	updateValue: () => {},

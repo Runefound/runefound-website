@@ -1,0 +1,22 @@
+.toolbar {
+	display: flex;
+}
+
+.toolbar-auxiliary,
+.toolbar-primary {
+	align-items: center;
+	display: flex;
+
+	> *:not(:first-child) {
+		margin-left: 1rem;
+	}
+}
+
+.toolbar-auxiliary {
+	order: 1;
+}
+
+.toolbar-primary {
+	margin-left: auto;
+	order: 2;
+}

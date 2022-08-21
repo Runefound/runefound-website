@@ -6,7 +6,9 @@ import {
 	initializeApp,
 } from 'firebase-admin/app'
 
-if (!getApp()) {
+try {
+	getApp()
+} catch (error) {
 	initializeApp({
 		credential: cert({
 			/* eslint-disable camelcase */
@@ -26,4 +28,5 @@ if (!getApp()) {
 	})
 }
 
+export { getApp }
 export { getAuth } from 'firebase-admin/auth'

@@ -2,12 +2,15 @@
 	--hue-shift: 0deg;
 
 	@include generateHSLCustomPropertiesFromColor('palette-black', #060606);
-	@include generateHSLCustomPropertiesFromColor('palette-dark-grey', #1a1a1a);
-	@include generateHSLCustomPropertiesFromColor('palette-green', #42dca3);
+	@include generateHSLCustomPropertiesFromColor('palette-dull-black', #1a1a1a);
+	@include generateHSLCustomPropertiesFromColor('palette-light-green', #42dca3);
+	@include generateHSLCustomPropertiesFromColor('palette-green', #00bc8c);
+	@include generateHSLCustomPropertiesFromColor('palette-dark-green', #009670);
+	@include generateHSLCustomPropertiesFromColor('palette-dark-grey', #313131);
 	@include generateHSLCustomPropertiesFromColor('palette-grey', #444444);
 	@include generateHSLCustomPropertiesFromColor('palette-light-grey', #999999);
 	@include generateHSLCustomPropertiesFromColor('palette-white', #fff);
 
-	--background-color: var(--palette-dark-grey);
+	--background-color: var(--palette-dull-black);
 	--text-color: var(--palette-white);
 }
