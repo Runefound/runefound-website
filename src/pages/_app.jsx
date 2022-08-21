@@ -12,6 +12,7 @@ import '../scss/app.scss'
 import { AnimatePresence } from 'framer-motion'
 import { ColorModeContextProvider } from 'react-color-mode'
 import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core'
+import NextHead from 'next/head.js'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 
@@ -47,21 +48,30 @@ export default function App(props) {
 	const router = useRouter()
 
 	return (
-		<ColorModeContextProvider>
-			<AuthContextProvider>
-				<AnimatePresence
-					exitBeforeEnter
-					onExitComplete={handleExitComplete}>
-					<PageLayout
-						showTitle={Component.showTitle}
-						title={Component.title}>
-						<Component
-							key={router.route}
-							{...pageProps} />
-					</PageLayout>
-				</AnimatePresence>
-			</AuthContextProvider>
-		</ColorModeContextProvider>
+		<>
+			<NextHead>
+				<meta charSet={'utf-8'} />
+				<meta
+					content={'width=device-width, initial-scale=1, maximum-scale=1'}
+					name={'viewport'} />
+			</NextHead>
+
+			<ColorModeContextProvider>
+				<AuthContextProvider>
+					<AnimatePresence
+						exitBeforeEnter
+						onExitComplete={handleExitComplete}>
+						<PageLayout
+							showTitle={Component.showTitle}
+							title={Component.title}>
+							<Component
+								key={router.route}
+								{...pageProps} />
+						</PageLayout>
+					</AnimatePresence>
+				</AuthContextProvider>
+			</ColorModeContextProvider>
+		</>
 	)
 }
 
