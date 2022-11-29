@@ -54,11 +54,13 @@ export function UserMenu() {
 					href={'/login'}
 					isAuxiliary
 					isButton>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faRightToBracket} />
+					<>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faRightToBracket} />
 
-					{'Login'}
+						{'Login'}
+					</>
 				</Link>
 			)}
 

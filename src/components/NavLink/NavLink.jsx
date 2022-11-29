@@ -93,15 +93,17 @@ export function NavLink(props) {
 		<Link
 			className={compiledClassName}
 			href={path}>
-			{children}
+			<>
+				{children}
 
-			{(Boolean(links)) && (
-				<Button onClick={handleSubnavToggle}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faCaretDown}/>
-				</Button>
-			)}
+				{(Boolean(links)) && (
+					<Button onClick={handleSubnavToggle}>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faCaretDown}/>
+					</Button>
+				)}
+			</>
 		</Link>
 	)
 
