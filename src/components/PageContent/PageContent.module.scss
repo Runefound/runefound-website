@@ -1,4 +1,6 @@
 .page-content {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 	padding-bottom: 2rem;
 	padding-top: 2rem;
 }
