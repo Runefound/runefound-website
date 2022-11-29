@@ -59,7 +59,7 @@ export default function App(props) {
 			<ColorModeContextProvider>
 				<AuthContextProvider>
 					<AnimatePresence
-						exitBeforeEnter
+						mode={'wait'}
 						onExitComplete={handleExitComplete}>
 						<PageLayout
 							showTitle={Component.showTitle}

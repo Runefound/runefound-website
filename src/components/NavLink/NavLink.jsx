@@ -119,7 +119,7 @@ export function NavLink(props) {
 					exit={'collapsed'}
 					initial={'collapsed'}
 					variants={SUBNAV_WRAPPER_VARIANTS}>
-					<AnimatePresence exitBeforeEnter>
+					<AnimatePresence mode={'wait'}>
 						{isOpen && links.map((link, index) => {
 							return (
 								<motion.div
