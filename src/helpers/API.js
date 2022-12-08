@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 /******************************************************************************\
  * Core functions
 \******************************************************************************/
@@ -10,6 +12,8 @@
  * @returns {*} The response.
  */
 export function apiFetch(path, options = {}) {
+	const url = new URL(path.replace(/^\/+/u, ''), process.env.NEXT_PUBLIC_API_URL)
+
 	const headers = {
 		...(options.headers || {}),
 	}
@@ -26,7 +30,7 @@ export function apiFetch(path, options = {}) {
 		}
 	}
 
-	return fetch(`/api/${path.replace(/^\/+/u, '')}`, {
+	return fetch(url, {
 		...options,
 		body,
 		headers,
@@ -61,7 +65,7 @@ export function apiFetchJSON(...args) {
  * @param {string} user.username The username of the new account.
  */
 export async function createAccount(user) {
-	const response = await apiFetch('/auth/create-account', {
+	const response = await apiFetch('/v1/auth/create-account', {
 		body: user,
 		method: 'post',
 	})
@@ -78,7 +82,7 @@ export async function createAccount(user) {
  * @returns {Promise} The API response.
  */
 export function validateEmail(email) {
-	return apiFetch(`/auth/validate-email?email=${email}`)
+	return apiFetch(`/v1/auth/validate-email?email=${email}`)
 }
 
 /**
@@ -88,5 +92,5 @@ export function validateEmail(email) {
  * @returns {Promise} The API response.
  */
 export function validateUsername(username) {
-	return apiFetch(`/auth/validate-username?username=${username}`)
+	return apiFetch(`/v1/auth/validate-username?username=${username}`)
 }
