@@ -235,6 +235,9 @@ module.exports = {
 		'security/detect-object-injection': ['off'],
 	},
 	settings: {
+		jsdoc: {
+			mode: 'typescript',
+		},
 		react: {
 			version: 'detect',
 		},
