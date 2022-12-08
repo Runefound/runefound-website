@@ -73,11 +73,10 @@ export function Link(props) {
 	}
 
 	return (
-		<NextLink href={href}>
-			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid,react/forbid-elements */}
-			<a className={compiledClassName}>
-				{children}
-			</a>
+		<NextLink
+			className={compiledClassName}
+			href={href}>
+			{children}
 		</NextLink>
 	)
 }

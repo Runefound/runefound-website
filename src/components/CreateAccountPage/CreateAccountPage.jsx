@@ -41,6 +41,10 @@ export function CreateAccountPage() {
 			<Content>
 				<CreateAccountForm />
 			</Content>
+
+			<Content>
+				<p>{'Join hundreds of other users that are looking to play together!'}</p>
+			</Content>
 		</PageContent>
 	)
 }

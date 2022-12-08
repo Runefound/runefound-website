@@ -11,18 +11,13 @@
 	line-height: 2;
 }
 
-.brand a {
-	align-items: center;
-	display: flex;
-	flex-shrink: 0;
-	height: 7.5rem;
-	justify-content: center;
-	position: relative;
-	width: 20rem;
-
-	> * {
-		max-width: 50%;
-		left: 50% !important;
-		translate: -50% 0;
+.brand {
+	a {
+		align-items: center;
+		display: flex;
+		flex-shrink: 0;
+		height: 7.5rem;
+		justify-content: center;
+		width: 20rem;
 	}
 }

@@ -35,38 +35,48 @@ export function BannerFooter() {
 		<footer className={styles['banner-footer']}>
 			<nav className={styles.legal}>
 				<Link href={'/code-of-conduct'}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faHeart} />
-					{'Code of Conduct'}
+					<>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faHeart} />
+						{'Code of Conduct'}
+					</>
 				</Link>
 
 				<Link href={'/terms-of-service'}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faFileContract} />
-					{'Terms of Service'}
+					<>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faFileContract} />
+						{'Terms of Service'}
+					</>
 				</Link>
 
 				<Link href={'/privacy-policy'}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faUserSecret} />
-					{'Privacy Policy'}
+					<>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faUserSecret} />
+						{'Privacy Policy'}
+					</>
 				</Link>
 
 				<Link href={'/cookie-policy'}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faCookie} />
-					{'Cookie Policy'}
+					<>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faCookie} />
+						{'Cookie Policy'}
+					</>
 				</Link>
 
 				<Link href={'/acceptable-use-policy'}>
-					<FontAwesomeIcon
-						fixedWidth
-						icon={faCheckDouble} />
-					{'Acceptable Use Policy'}
+					<>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faCheckDouble} />
+						{'Acceptable Use Policy'}
+					</>
 				</Link>
 			</nav>
 

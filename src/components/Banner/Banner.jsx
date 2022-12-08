@@ -92,10 +92,9 @@ export function Banner() {
 				<Link href={'/'}>
 					<Image
 						alt={'Roll For Guild Logo'}
-						layout={'fill'}
-						objectFit={'contain'}
-						objectPosition={'center'}
-						src={'/images/brands/roll-for-guild/logomark.white.short.svg'} />
+						height={75}
+						src={'/images/brands/roll-for-guild/logomark.white.short.svg'}
+						width={100} />
 				</Link>
 			</h1>
 
