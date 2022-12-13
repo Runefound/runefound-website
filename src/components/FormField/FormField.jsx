@@ -8,6 +8,7 @@ import styles from './FormField.module.scss'
 // Module imports
 import {
 	Children,
+	cloneElement,
 	useId,
 	useMemo,
 } from 'react'
@@ -20,6 +21,8 @@ import PropTypes from 'prop-types'
 
 // Local imports
 import { FormFieldContext } from './FormFieldContext.js'
+import { FormInput } from '../FormInput/FormInput.jsx'
+import { Text } from '../Text/Text.jsx'
 import { useForm } from '../Form/useForm.js'
 
 
@@ -29,12 +32,7 @@ import { useForm } from '../Form/useForm.js'
 /**
  * Renders helper text, errors, and labels for form fields.
  *
- * @param {object} props All props.
- * @param {import('react').ReactNode} [props.children] The contents of the component.
- * @param {string} [props.className] Additional classes to be applied to the component.
- * @param {string} [props.helperText] A message to clarify the purpose or usage of the field.
- * @param {boolean} [props.isRequired] Whether or not this field must be non-empty for the form to be valid.
- * @param {string} [props.label] A label to indicate the usage of this field.
+ * @component
  */
 export function FormField(props) {
 	const {
@@ -47,71 +45,91 @@ export function FormField(props) {
 	const { errors: formErrors } = useForm()
 	const id = useId()
 
-	let renderedHelpers = null
-	let renderedLabel = null
-
 	const compiledClassName = useMemo(() => {
 		return classnames(styles['form-field'], className)
 	}, [className])
+
+	const renderedChildren = useMemo(() => {
+		const parsedChildren = Children.map(children, child => {
+			const childProps = { ...child.props }
+
+			if (child.type === FormInput) {
+				childProps.isRounded = false
+			}
+
+			return cloneElement(child, childProps)
+		})
+
+		if (Children.count(parsedChildren) > 1) {
+			return (
+				<div className={styles['has-addons']}>
+					{parsedChildren}
+				</div>
+			)
+		}
+
+		return parsedChildren
+	}, [children])
+
+	const renderedHelpers = useMemo(() => {
+		if (!formErrors[id]?.length && helperText) {
+			return (
+				<p className={styles['help-text']}>
+					{helperText}
+				</p>
+			)
+		}
+
+		if (formErrors[id]?.length) {
+			return (
+				<ul>
+					{formErrors[id].map(error => (
+						<li
+							key={error}
+							className={styles['help-text']}>
+							<Text isDanger>
+								{error}
+							</Text>
+						</li>
+					))}
+				</ul>
+			)
+		}
+
+		return null
+	}, [])
+
+	const renderedLabel = useMemo(() => {
+		if (label) {
+			return (
+				<label
+					className={styles['label']}
+					htmlFor={id}>
+					{label}
+					{isRequired && (
+						<Text isDanger>
+							{'*'}
+						</Text>
+					)}
+				</label>
+			)
+		}
+
+		return null
+	}, [
+		isRequired,
+		label,
+	])
 
 	const providerValue = useMemo(() => {
 		return { id }
 	}, [id])
 
-	if (!formErrors[id]?.length && helperText) {
-		renderedHelpers = (
-			<p className={'help'}>
-				{helperText}
-			</p>
-		)
-	} else if (formErrors[id]?.length) {
-		renderedHelpers = (
-			<ul>
-				{formErrors[id].map(error => (
-					<li
-						key={error}
-						className={'help is-danger'}>
-						{error}
-					</li>
-				))}
-			</ul>
-		)
-	}
-
-	if (label) {
-		renderedLabel = (
-			<label
-				className={'label'}
-				htmlFor={id}>
-				{label}
-				{isRequired && (
-					<span className={'has-text-danger'}>
-						{'*'}
-					</span>
-				)}
-			</label>
-		)
-	}
-
-	if (Children.count(children) > 1) {
-		return (
-			<div className={classnames('field', className)}>
-				{renderedLabel}
-
-				<div className={'field has-addons'}>
-					{children}
-				</div>
-
-				{renderedHelpers}
-			</div>
-		)
-	}
-
 	return (
 		<FormFieldContext.Provider value={providerValue}>
 			<div className={compiledClassName}>
 				{renderedLabel}
-				{children}
+				{renderedChildren}
 				{renderedHelpers}
 			</div>
 		</FormFieldContext.Provider>
@@ -127,12 +145,21 @@ FormField.defaultProps = {
 }
 
 FormField.propTypes = {
+	/** The contents of the component. */
 	children: PropTypes.node,
+
+	/** Additional classes to be applied to the component. */
 	className: PropTypes.string,
+
+	/** A message to clarify the purpose or usage of the field. */
 	helperText: PropTypes.oneOfType([
 		PropTypes.node,
 		PropTypes.string,
 	]),
+
+	/** Whether or not this field must be non-empty for the form to be valid. */
 	isRequired: PropTypes.bool,
+
+	/** A label to indicate the usage of this field. */
 	label: PropTypes.string,
 }

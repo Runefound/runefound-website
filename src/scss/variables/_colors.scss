@@ -9,6 +9,7 @@
 	@include generateHSLCustomPropertiesFromColor('palette-dark-grey', #313131);
 	@include generateHSLCustomPropertiesFromColor('palette-grey', #444444);
 	@include generateHSLCustomPropertiesFromColor('palette-light-grey', #999999);
+	@include generateHSLCustomPropertiesFromColor('palette-red', #f00);
 	@include generateHSLCustomPropertiesFromColor('palette-white', #fff);
 
 	--background-color: var(--palette-dull-black);

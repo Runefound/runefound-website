@@ -1,6 +1,6 @@
 .form-input {
-	border-radius: 0.25rem;
 	display: flex;
+	flex-grow: 1;
 	overflow: hidden;
 
 	input {
@@ -19,18 +19,37 @@
 		&::placeholder {
 			color: var(--palette-light-grey);
 		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	&.is-rounded {
+		border-radius: 0.25rem;
 	}
 }
 
+.addon-end,
 .addon-start {
 	align-items: center;
 	background-color: var(--palette-white);
-	border-right-color: var(--palette-light-grey);
-	border-right-style: solid;
-	border-right-width: 0.1rem;
 	color: var(--palette-light-grey);
 	display: flex;
 	justify-content: center;
-	order: 1;
 	padding: 1rem;
+}
+
+.addon-end {
+	border-left-color: var(--palette-light-grey);
+	border-left-style: solid;
+	border-left-width: 0.1rem;
+	order: 3;
+}
+
+.addon-start {
+	border-right-color: var(--palette-light-grey);
+	border-right-style: solid;
+	border-right-width: 0.1rem;
+	order: 1;
 }

@@ -45,6 +45,7 @@ export function FormInput(props) {
 		isDisabled,
 		isMultiline,
 		isRequired,
+		isRounded,
 		maxLength,
 		minLength,
 		name,
@@ -133,6 +134,7 @@ export function FormInput(props) {
 
 	const wrapperCompiledClassName = useMemo(() => {
 		return classnames(styles['form-input'], className, {
+			[styles['is-rounded']]: isRounded,
 			'has-icons-left': addonStart,
 			'has-icons-right': hasErrors,
 		})
@@ -268,6 +270,7 @@ FormInput.defaultProps = {
 	isDisabled: false,
 	isMultiline: false,
 	isRequired: false,
+	isRounded: true,
 	maxLength: null,
 	minLength: null,
 	name: '',
@@ -361,6 +364,9 @@ FormInput.propTypes = {
 	/** Whether or not this input must be non-empty for the form to be valid. */
 	isRequired: PropTypes.bool,
 
+	/** Whether or not to round the corners of this input. */
+	isRounded: PropTypes.bool,
+
 	/** The maximum number of characters supported by this input. */
 	maxLength: PropTypes.number,
 
@@ -384,6 +390,7 @@ FormInput.propTypes = {
 		'month',
 		'number',
 		'password',
+		'search',
 		'tel',
 		'text',
 		'time',
@@ -399,7 +406,6 @@ FormInput.propTypes = {
 		// 'radio',
 		// 'range',
 		// 'reset',
-		// 'search',
 		// 'submit',
 	]),
 
