@@ -31,25 +31,7 @@ import { useFormFieldContext } from '../FormField/useFormFieldContext.js'
 /**
  * Renders a text input.
  *
- * @param {object} props All props.
- * @param {'center' | 'left' | 'right'} [props.alignment='left'] Alters the has-text-* value.
- * @param {import('react').ReactNode} [props.addonEnd] Component(s) to be displayed after the input.
- * @param {import('react').ReactNode} [props.addonStart] Component(s) to be displayed before the input.
- * @param {string} [props.autocomplete] Informs the user agent what type of autocomplete this input supports, if any.
- * @param {string} [props.className] Additional classes to be applied to the component.
- * @param {string} props.id The ID of this input in the form state.
- * @param {string} [props.initialValue] The initial value of this input.
- * @param {boolean} [props.isDisabled] Whether or not this input is disabled.
- * @param {boolean} [props.isRequired] Whether or not this input must be non-empty for the form to be valid.
- * @param {boolean} [props.isMultiline] Whether or not this input supports multiple lines of text.
- * @param {number} [props.maxLength] The maximum number of characters supported by this input.
- * @param {number} [props.minLength] The minimum number of characters supported by this input.
- * @param {string} [props.name] The name to be used for this input.
- * @param {Function} [props.onChange] A function to be executed when the contents of this input change.
- * @param {string} [props.placeholder] Placeholder text to be displayed inside the input.
- * @param {string} [props.type='text'] The type of this input.
- * @param {object} [props.validateWithErrors=false] ?
- * @param {string} [props.value] The current value of the input.
+ * @component
  */
 export function FormInput(props) {
 	const {
@@ -259,7 +241,7 @@ export function FormInput(props) {
 				// 		fixedWidth
 				// 		icon={addonEnd} />
 				// </span>
-				<span className={styles['addon-right']}>
+				<span className={styles['addon-end']}>
 					{addonEnd}
 				</span>
 			)}
@@ -297,13 +279,20 @@ FormInput.defaultProps = {
 }
 
 FormInput.propTypes = {
+	/** Component(s) to be displayed after the input. */
 	addonEnd: PropTypes.node,
+
+	/** Component(s) to be displayed before the input. */
 	addonStart: PropTypes.node,
+
+	/** Determines the alignment of the input's contents. */
 	alignment: PropTypes.oneOf([
 		'center',
 		'left',
 		'right',
 	]),
+
+	/** Informs the user agent what type of autocomplete this input supports, if any. */
 	autocomplete: PropTypes.oneOf([
 		'address-level-1',
 		'address-level-2',
@@ -353,17 +342,41 @@ FormInput.propTypes = {
 		'url',
 		'username',
 	]),
+
+	/** Additional classes to be applied to the component. */
 	className: PropTypes.string,
+
+	/** The ID of this input in the form state. */
 	id: PropTypes.string,
+
+	/** The initial value of this input. */
 	initialValue: PropTypes.string,
+
+	/** Whether or not this input is disabled. */
 	isDisabled: PropTypes.bool,
+
+	/** Whether or not this input supports multiple lines of text. */
 	isMultiline: PropTypes.bool,
+
+	/** Whether or not this input must be non-empty for the form to be valid. */
 	isRequired: PropTypes.bool,
+
+	/** The maximum number of characters supported by this input. */
 	maxLength: PropTypes.number,
+
+	/** The minimum number of characters supported by this input. */
 	minLength: PropTypes.number,
+
+	/** The name to be used for this input. */
 	name: PropTypes.string,
+
+	/** A function to be executed when the contents of this input change. */
 	onChange: PropTypes.func,
+
+	/** Placeholder text to be displayed inside the input. */
 	placeholder: PropTypes.string,
+
+	/** The type of this input. */
 	type: PropTypes.oneOf([
 		'date',
 		'datetime-local',
@@ -389,6 +402,10 @@ FormInput.propTypes = {
 		// 'search',
 		// 'submit',
 	]),
+
+	/** If true, allows the field to be reported as valid even if it has errors. */
 	validateWithErrors: PropTypes.bool,
+
+	/** The current value of the input. */
 	value: PropTypes.string,
 }

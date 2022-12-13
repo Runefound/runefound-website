@@ -9,7 +9,8 @@
 	font-family: inherit;
 	font-size: inherit;
 	line-height: 2;
-	padding: 1rem 2rem;
+	padding: 0.5rem 2rem;
+	position: relative;
 	text-decoration: none;
 	transition-duration: 0.2s;
 	transition-property:
@@ -35,6 +36,10 @@
 		}
 	}
 
+	&.is-loading {
+		position: relative;
+	}
+
 	&.is-primary {
 		background-color: var(--palette-green);
 		color: var(--palette-white);
@@ -48,5 +53,16 @@
 	&.is-disabled {
 		cursor: auto;
 		opacity: 0.65;
+	}
+
+	.children {
+		position: relative;
+	}
+
+	.loader {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		translate: -50% -50%;
 	}
 }
