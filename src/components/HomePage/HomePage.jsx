@@ -1,6 +1,27 @@
 // Local imports
+import styles from './HomePage.module.scss'
+
 import { Content } from '../Content/Content.jsx'
 import { PageContent } from '../PageContent/PageContent.jsx'
+import { TextRoller } from '../TextRoller/TextRoller.jsx'
+
+
+
+
+
+// Constants
+const HEADING_LINES2 = [
+	['brave knight', 'a dragon to slay'],
+	['cunning rogue', 'like-minded thieves'],
+	['powerful wizard', 'fellow spell slingers'],
+	['noble paladin', 'holy quest'],
+	['charming bard', 'a band of minstrels'],
+	['fierce barbarian', 'a raiding tribe'],
+	['wise druid', 'a forest to protect'],
+	['stealthy ranger', 'fellow outdoorsmen'],
+	['mysterious warlock', 'cabal of fiendish patrons'],
+	['devout cleric', 'sacrosanct fellowship'],
+]
 
 
 
@@ -13,13 +34,21 @@ export function HomePage() {
 	return (
 		<PageContent>
 			<Content>
-				<p>{'Roll For Guild wants to bring people to the RPG table. We aim to build tools to make running campaigns and one shots easier as well as enable people to form, find, and join groups in their local area.'}</p>
+				<h2 className={styles['heading']}>
+					{'Are you a '}
 
-				<p>{'We\'re building some simple tools such as campaign and character trackers, session notes, and spell books. However, what we are really excited about are the tools we can\'t mention yet. Tools that make your GM\'s life easier and sessions run smoother.'}</p>
+					<TextRoller items={HEADING_LINES2.map(items => items[0])} />
 
-				<p>{'In addition we want to address the largest barrier to entry and continual play… Finding people to play with. We are building a platform of not only tools, but a way that groups can search for nearby players and players for nearby groups. Gone forever will be the days and weeks of tracking a new group to join or a player to fill an open seat.'}</p>
+					{' looking for '}
 
-				<p>{'We are Roll For Guild, and we just want to make your RPG experiences the best possible.'}</p>
+					<TextRoller items={HEADING_LINES2.map(items => items[1])} />
+
+					{'?'}
+				</h2>
+
+				{/* <p>
+					{'Are you looking to expand your tabletop group? Maybe you\'re a solo mercenary in need of a new party. Look no further! Our platform is designed specifically for TTRPG enthusiasts to connect and find new groups to play with. With our user-friendly interface and extensive community, you can easily find players near you with similar interests and schedules. Plus, our platform allows you to seamlessly plan and organize your gaming sessions, so you can focus on what\'s really important: the adventure! Join us today and start making lasting connections with fellow TTRPG players. Don\'t let the adventure end - join our platform and keep the dice rolling!'}
+				</p> */}
 			</Content>
 		</PageContent>
 	)

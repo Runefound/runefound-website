@@ -12,6 +12,18 @@
 	@include generateHSLCustomPropertiesFromColor('palette-red', #f00);
 	@include generateHSLCustomPropertiesFromColor('palette-white', #fff);
 
-	--background-color: var(--palette-dull-black);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-green-900', #102422);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-green-800', #1c2325);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-green-700', #16362e);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-green-400', #48d597);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-900', #080f11);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-800', #161c1e);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-700', #292f31);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-500', #787b7d);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-300', #9ca3af);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-200', #9c9fa0);
+	@include generateHSLCustomPropertiesFromColor('palette-oxide-grey-100', #e7e7e8);
+
+	--background-color: var(--palette-oxide-grey-900);
 	--text-color: var(--palette-white);
 }

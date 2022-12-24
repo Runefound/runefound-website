@@ -1,18 +1,21 @@
 .page-header {
 	align-items: center;
-	background-color: var(--palette-black);
+	background-color: var(--palette-oxide-grey-900);
+	border-bottom-color: var(--palette-oxide-green-800);
+	border-bottom-style: solid;
+	border-bottom-width: 0.1rem;
+	color: var(--palette-oxide-grey-100);
 	display: flex;
-	font-family: var(--font-display);
 	grid-area: header;
 
 	h2 {
+		font-family: var(--font-articulat);
 		font-size: 4rem;
-		font-weight: 500;
+		font-weight: 200;
 		line-height: 1.5;
 		padding-bottom: 1rem;
 		padding-left: 2rem;
 		padding-right: 2rem;
 		padding-top: 1rem;
-		text-transform: uppercase;
 	}
 }

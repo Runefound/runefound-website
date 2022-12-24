@@ -38,7 +38,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	font-size: var(--font-size);
-	letter-spacing: 0.1rem;
+	letter-spacing: var(--letter-spacing);
+	line-height: var(--line-height);
 	transition-duration: 0.2s;
 	transition-property: font-size;
 }

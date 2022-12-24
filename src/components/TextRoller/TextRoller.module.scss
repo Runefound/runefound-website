@@ -1,0 +1,13 @@
+.text-roller {
+	display: inline-block;
+	position: relative;
+	vertical-align: bottom;
+}
+
+.text-roller-item {
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	white-space: nowrap;
+}

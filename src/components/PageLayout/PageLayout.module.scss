@@ -1,7 +1,4 @@
 .page-layout {
-	border-top-color: var(--palette-light-grey);
-	border-top-style: solid;
-	border-top-width: 0.1rem;
 	display: grid;
 	grid-template-areas:
 		'banner header'
@@ -19,8 +16,4 @@
 		grid-area: content;
 		overflow: auto;
 	}
-}
-
-.page-header {
-	grid-area: header;
 }

@@ -1,0 +1,18 @@
+$fontWeights: (
+	300,
+	400,
+	500,
+	600,
+	700,
+);
+
+@each $fontWeight in $fontWeights {
+	@font-face {
+		font-family: 'Suisse Intl';
+		src: url('./suisse-intl-#{$fontWeight}.woff2') format('woff2');
+		font-display: auto;
+		font-style: normal;
+		font-weight: $fontWeight;
+		font-stretch: normal;
+	}
+}

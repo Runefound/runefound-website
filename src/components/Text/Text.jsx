@@ -23,14 +23,19 @@ export function Text(props) {
 	const {
 		children,
 		className,
+		isBold,
 		isDanger,
 	} = props
 
 	const compiledClassName = useMemo(() => {
 		return classnames(className, {
+			[styles['bold']]: isBold,
 			[styles['danger']]: isDanger,
 		})
-	}, [isDanger])
+	}, [
+		isBold,
+		isDanger,
+	])
 
 	return (
 		<span className={compiledClassName}>
@@ -42,6 +47,7 @@ export function Text(props) {
 Text.defaultProps = {
 	children: null,
 	className: '',
+	isBold: false,
 	isDanger: false,
 }
 
@@ -51,6 +57,9 @@ Text.propTypes = {
 
 	/** Additional classes to be applied. */
 	className: PropTypes.string,
+
+	/** Whether or not the component should be bold. */
+	isBold: PropTypes.bool,
 
 	/** Whether or not the component should be styled to indicate danger (i.e. an error). */
 	isDanger: PropTypes.bool,

@@ -5749,6 +5749,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-cool-dimensions@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "react-cool-dimensions@npm:3.0.0"
+  peerDependencies:
+    react: ">= 16.8.0"
+  checksum: b8b58bd51396168b5b8d4e4a8d3692469037acd0a65362109fd997d7e70abd32a2c137fc558c82938a509768df9dd79f4cf314c940bf8081a0c794a19fcf4e0b
+  languageName: node
+  linkType: hard
+
 "react-docgen@npm:^5.4.0":
   version: 5.4.3
   resolution: "react-docgen@npm:5.4.3"
@@ -6083,6 +6092,7 @@ __metadata:
     prop-types: ^15.8.1
     react: ^18.2.0
     react-color-mode: ^2.0.1
+    react-cool-dimensions: ^3.0.0
     react-dom: ^18.2.0
     react-textarea-autosize: ^8.4.0
     sass: ^1.56.1
