@@ -1,0 +1,16 @@
+.dialog {
+	background-color: transparent;
+	border: none;
+
+	&::backdrop {
+		background-color: rgba(#080f11, 0.9);
+	}
+}
+
+.dialog-contents {
+	background-color: var(--background-color);
+	color: var(--text-color);
+	height: 70vh;
+	padding: 5rem;
+	width: 50vw;
+}

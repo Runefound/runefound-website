@@ -22,6 +22,7 @@ import { useRouter } from 'next/router'
 
 // Local imports
 import { AuthContextProvider } from '../contexts/Auth/AuthContextProvider.jsx'
+import { CommandPalette } from '../components/CommandPalette/CommandPalette.jsx'
 import { PageLayout } from '../components/PageLayout/PageLayout.jsx'
 
 
@@ -55,6 +56,8 @@ export default function App(props) {
 					content={'width=device-width, initial-scale=1, maximum-scale=1'}
 					name={'viewport'} />
 			</NextHead>
+
+			<CommandPalette />
 
 			<ColorModeContextProvider>
 				<AuthContextProvider>

@@ -1,0 +1,11 @@
+.list {
+	list-style: none;
+
+	&.is-bulleted {
+		list-style: square;
+	}
+
+	&.is-numbered {
+		list-style-type: decimal;
+	}
+}

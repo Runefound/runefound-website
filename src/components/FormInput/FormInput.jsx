@@ -1,12 +1,6 @@
-// Style imports
-import styles from './FormInput.module.scss'
-
-
-
-
-
 // Module imports
 import {
+	forwardRef,
 	useCallback,
 	useLayoutEffect,
 	useMemo,
@@ -21,6 +15,8 @@ import TextareaAutosize from 'react-textarea-autosize'
 
 
 // Local imports
+import styles from './FormInput.module.scss'
+
 import { useForm } from '../Form/useForm.js'
 import { useFormFieldContext } from '../FormField/useFormFieldContext.js'
 
@@ -33,7 +29,7 @@ import { useFormFieldContext } from '../FormField/useFormFieldContext.js'
  *
  * @component
  */
-export function FormInput(props) {
+export const FormInput = forwardRef((props, ref) => {
 	const {
 		addonStart,
 		addonEnd,
@@ -162,6 +158,7 @@ export function FormInput(props) {
 			name: name,
 			onChange: onChange ?? handleChange,
 			placeholder: placeholder,
+			ref,
 			required: isRequired,
 			value: values[internalID] ?? value,
 		}
@@ -180,6 +177,7 @@ export function FormInput(props) {
 		name,
 		onChange,
 		placeholder,
+		ref,
 		values,
 		value,
 	])
@@ -257,7 +255,7 @@ export function FormInput(props) {
 			)} */}
 		</div>
 	)
-}
+})
 
 FormInput.defaultProps = {
 	addonEnd: null,

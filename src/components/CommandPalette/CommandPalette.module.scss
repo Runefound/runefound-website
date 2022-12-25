@@ -1,0 +1,22 @@
+.command-palette {
+	font-size: 1.5em;
+}
+
+.results {
+	// margin-top: 2rem;
+}
+
+.result-item {
+	// background-color: var(--palette-oxide-grey-800);
+	// margin-top: 2rem;
+	// padding: 2rem;
+
+	button {
+		text-align: left;
+		width: 100%;
+	}
+
+	&.is-active button {
+		background-color: var(--palette-oxide-grey-800);
+	}
+}

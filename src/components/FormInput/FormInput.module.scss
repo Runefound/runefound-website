@@ -4,9 +4,9 @@
 	overflow: hidden;
 
 	input {
-		background-color: var(--palette-white);
+		background-color: transparent;
 		border: none;
-		color: var(--palette-black);
+		color: inherit;
 		font-family: inherit;
 		font-size: inherit;
 		font-weight: inherit;
@@ -33,7 +33,6 @@
 .addon-end,
 .addon-start {
 	align-items: center;
-	background-color: var(--palette-white);
 	color: var(--palette-light-grey);
 	display: flex;
 	justify-content: center;
@@ -41,15 +40,9 @@
 }
 
 .addon-end {
-	border-left-color: var(--palette-light-grey);
-	border-left-style: solid;
-	border-left-width: 0.1rem;
 	order: 3;
 }
 
 .addon-start {
-	border-right-color: var(--palette-light-grey);
-	border-right-style: solid;
-	border-right-width: 0.1rem;
 	order: 1;
 }

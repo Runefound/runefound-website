@@ -37,16 +37,7 @@ const VARIANTS = {
 /**
  * Renders a button.
  *
- * @param {object} props All props.
- * @param {import('react').ReactNode} [props.children] The contents of the component.
- * @param {string} [props.className] Additional classes to be applied to the component.
- * @param {boolean} [props.isAuxiliary=false] Whether or not this link is used for an auxiliary action.
- * @param {boolean} [props.isDisabled=false] Whether or not this component should be disabled.
- * @param {boolean} [props.isLink=false] Whether or not this component should look like a link.
- * @param {boolean} [props.isLoading=false] Whether or not this component is in a loading state.
- * @param {boolean} [props.isPrimary=false] Whether or not this button is used for a primary action.
- * @param {boolean} [props.isSubmit=false] Whether or not this should be a submit button.
- * @param {Function} [props.onClick] The function to be executed when this button is clicked.
+ * @component
  */
 export function Button(props) {
 	const {
@@ -59,6 +50,8 @@ export function Button(props) {
 		isPrimary,
 		isSubmit,
 		onClick,
+		onMouseOut,
+		onMouseOver,
 	} = props
 
 	const compiledClassName = useMemo(() => {
@@ -84,6 +77,8 @@ export function Button(props) {
 			className={compiledClassName}
 			disabled={isDisabled}
 			onClick={onClick}
+			onMouseOver={onMouseOver}
+			onMouseOut={onMouseOut}
 			type={isSubmit ? 'submit' : 'button'}>
 			<motion.span
 				animate={isLoading ? 'hidden' : 'visible'}
@@ -112,21 +107,47 @@ Button.defaultProps = {
 	className: '',
 	isAuxiliary: false,
 	isDisabled: false,
+	isFullWidth: false,
 	isLink: false,
 	isLoading: false,
 	isPrimary: false,
 	isSubmit: false,
 	onClick: null,
+	onMouseOut: () => {},
+	onMouseOver: () => {},
 }
 
 Button.propTypes = {
+	/** The contents of the component. */
 	children: PropTypes.node,
+
+	/** Additional classes to be applied to the component. */
 	className: PropTypes.string,
+
+	/** Whether or not this link is used for an auxiliary action. */
 	isAuxiliary: PropTypes.bool,
+
+	/** Whether or not this component should be disabled. */
 	isDisabled: PropTypes.bool,
+
+	/** Whether or not this component should look like a link. */
 	isLink: PropTypes.bool,
+
+	/** Whether or not this component is in a loading state. */
 	isLoading: PropTypes.bool,
+
+	/** Whether or not this button is used for a primary action. */
 	isPrimary: PropTypes.bool,
+
+	/** Whether or not this should be a submit button. */
 	isSubmit: PropTypes.bool,
+
+	/** The function to be executed when this button is clicked. */
 	onClick: PropTypes.func,
+
+	/** The function to be executed when the cursor moves away from this button. */
+	onMouseOut: PropTypes.func,
+
+	/** The function to be executed when the cursor moves over this button. */
+	onMouseOver: PropTypes.func,
 }
